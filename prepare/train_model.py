@@ -13,7 +13,7 @@ df['Amount'] = sc.fit_transform(df['Amount'].values.reshape(-1, 1))
 features = df.columns[0: -1]
 classifiers = {
     "Isolation Forest":IsolationForest(n_estimators=100),
-    "Local Outlier Factor":LocalOutlierFactor(n_neighbors=20, algorithm='auto', leaf_size=30, metric='minkowski',p=2, metric_params=None),
+    "Local Outlier Factor":LocalOutlierFactor(n_neighbors=20, algorithm='auto', leaf_size=30, metric='minkowski',p=2, metric_params=None, novelty=True),
     "Support Vector Machine":OneClassSVM(kernel='rbf', degree=3, gamma=0.1,nu=0.05, max_iter=-1)  
 }
 
