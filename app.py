@@ -28,7 +28,7 @@ if uploaded_file is not None:
     data['Amount'] = sc.fit_transform(data['Amount'].values.reshape(-1, 1))
     st.write(data.head())
 
-options = st.multiselect('Choose models', clf_names, ['Isolation Forest'])
+options = st.multiselect('Choose models', clf_names, ['Isolation Forest', 'Support Vector Machine'])
 confusion_matrixs = {}
 score_df = pd.DataFrame(columns=['model', 'tn', 'fp', 'fn', 'tp', 'recall', 'precision', 'f1-score'])
 for opt in options:
@@ -46,6 +46,9 @@ length =  len(options)
 fig, ax = plt.subplots(1, length, figsize=(10, 7))
 for i in range(length):
     cmp = ConfusionMatrixDisplay(confusion_matrixs[options[i]], display_labels=[0, 1])
-    cmp.plot(ax=ax[i])
+    if length == 1:
+        cmp.plot(ax=ax)
+    else:    
+        cmp.plot(ax=ax[i])
 
 st.pyplot(fig)
